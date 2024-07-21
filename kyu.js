@@ -23,6 +23,7 @@ function makeNegative(num) {
 
 function findAverage(array) {
     // your code here
-    let sum = array.reduce((acc, cv) => { return acc += cv });
-    return array.length === 0 ? 0 : sum / array.length
+    let sum
+    array.length === 0 ? sum = 0 : sum = array.reduce((acc, cv) => acc += cv);
+    return sum ? sum / array.length : 0
 }
