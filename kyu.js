@@ -16,3 +16,13 @@ Zero (0) is not checked for any specific sign. Negative zeros make no mathematic
 function makeNegative(num) {
     return num <= 0 ? num : num - num * 2
 }
+
+// Write a function which calculates the average of the numbers in a given list.
+
+// Note: Empty arrays should return 0.
+
+function findAverage(array) {
+    // your code here
+    let sum = array.reduce((acc, cv) => { return acc += cv });
+    return sum / array.length
+}
