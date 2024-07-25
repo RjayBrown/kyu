@@ -1,3 +1,5 @@
+/* Day 1 */
+
 /*
 DESCRIPTION:
 In this simple assignment you are given a number and have to make it negative. But maybe the number is already negative?
@@ -17,13 +19,32 @@ function makeNegative(num) {
     return num <= 0 ? num : num - num * 2
 }
 
-// Write a function which calculates the average of the numbers in a given list.
+/* Day 2 */
 
-// Note: Empty arrays should return 0.
+/*
+Write a function which calculates the average of the numbers in a given list.
+
+Note: Empty arrays should return 0.
+*/
 
 function findAverage(array) {
     // your code here
     let sum
     array.length === 0 ? sum = 0 : sum = array.reduce((acc, cv) => acc += cv);
     return sum ? sum / array.length : 0
+}
+
+/* Day 3 */
+
+// Complete the solution so that it returns true if the first argument(string) passed in ends with the 2nd argument (also a string).
+
+// Examples:
+
+solution('abc', 'bc') // returns true
+solution('abc', 'd') // returns false
+
+
+function solution(str, ending) {
+    // TODO: complete
+    return str.slice((str.length - ending.length)) === ending ? true : false
 }
