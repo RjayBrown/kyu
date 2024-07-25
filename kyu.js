@@ -36,9 +36,10 @@ function findAverage(array) {
 
 /* Day 3 */
 
-// Complete the solution so that it returns true if the first argument(string) passed in ends with the 2nd argument (also a string).
-
-// Examples:
+/*
+Complete the solution so that it returns true if the first argument(string) passed in ends with the 2nd argument (also a string).
+ Examples:
+*/
 
 solution('abc', 'bc') // returns true
 solution('abc', 'd') // returns false
@@ -47,4 +48,19 @@ solution('abc', 'd') // returns false
 function solution(str, ending) {
     // TODO: complete
     return str.slice((str.length - ending.length)) === ending ? true : false
+}
+
+/* Complete the function that accepts a string parameter, and reverses each word in the string. All spaces in the string should be retained.
+
+Examples
+"This is an example!" ==> "sihT si na !elpmaxe"
+"double  spaces"      ==> "elbuod  secaps"
+*/
+let words = "This is an example!"
+
+function reverseWords(str) {
+    // Go for it
+    str = str.split(' ')
+    let reversed = str.map(word => word.split('').reverse().join(''))
+    return reversed.join(' ')
 }
