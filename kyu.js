@@ -50,6 +50,9 @@ function solution(str, ending) {
     return str.slice((str.length - ending.length)) === ending ? true : false
 }
 
+
+/* Day 4 */
+
 /* Complete the function that accepts a string parameter, and reverses each word in the string. All spaces in the string should be retained.
 
 Examples
@@ -65,6 +68,8 @@ function reverseWords(str) {
     return reversed.join(' ')
 }
 
+/* Day 5 */
+
 /*
 In this kata you will create a function that takes a list of non-negative integers and strings and returns a new list with the strings filtered out.
 
@@ -78,6 +83,9 @@ function filter_list(l) {
     // Return a new array with the strings filtered out
     return l.filter(v => typeof v !== 'string')
 }
+
+
+/* Day 6 */
 
 /*
 You are going to be given a word. Your job is to return the middle character of the word. If the word's length is odd, return the middle character. If the word's length is even, return the middle 2 characters.
@@ -103,4 +111,18 @@ The middle character(s) of the word represented as a string.
 function getMiddle(s) {
     let i = Math.round(s.length / 2)
     return s.length % 2 === 0 ? `${s[i - 1]}${s[i]}` : `${s[i - 1]}`
+}
+
+
+/* Day 7 */
+
+/*
+Simple, given a string of words, return the length of the shortest word(s).
+
+String will never be empty and you do not need to account for different data types.
+*/
+
+function findShort(s) {
+    s = s.split(' ').sort((a, b) => a.length - b.length)
+    return s[0].length
 }
