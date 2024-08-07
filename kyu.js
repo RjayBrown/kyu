@@ -197,3 +197,15 @@ function getCount(str) {
         .filter(ltr => ltr === 'a' || ltr === 'e' || ltr === 'i' || ltr === 'o' || ltr === 'u')
         .length
 }
+
+/* Day 10 */
+
+function isPangram(string) {
+    //...
+    let chars = 'abcdefghijklmnopqrstuvwxyz'
+    let t = 0
+    for (let i = 0; i < chars.length; i++) {
+        string.toLowerCase().includes(chars[i]) ? t++ : t
+    }
+    return t >= 26 ? true : false
+}
