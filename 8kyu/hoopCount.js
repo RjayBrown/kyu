@@ -10,7 +10,7 @@ If he doesn't get 10 hoops, return the string "Keep at it until you get it".
 */
 
 function hoopCount(n) {
-    // conditional to return msg 
+    // conditional to return msg
     return n < 10 ? 'Keep at it until you get it!' : 'Great, now move on to tricks'
 }
 
