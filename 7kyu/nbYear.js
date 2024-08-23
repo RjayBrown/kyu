@@ -39,3 +39,4 @@ function nbYear(p0, percent, aug, p) {
   }
   return year
 }
+
