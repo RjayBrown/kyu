@@ -19,8 +19,8 @@ function rgb(r, g, b) {
     //loop to convert values
     let hexValues = rgb.map(v => {
         // check for non valid int
-        if (v < 0) { v = 0 }
-        if (v > 255) { v = 255 }
+        if (v < 0) v = 0
+        if (v > 255) v = 255
 
         // conversion formula
         let v1 = Math.floor(v / 16)
@@ -59,3 +59,5 @@ function rgb(r, g, b) {
     // return hex value
     return hexValues.join('')
 }
+
+rgbToHex(255, 255, 255)
