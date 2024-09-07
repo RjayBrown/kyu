@@ -1,8 +1,3 @@
-/* Day  */
-
-/*
-
-*/
 
 class Node {
   constructor(value) {
@@ -136,24 +131,25 @@ class LinkedList {
     return count
   }
 
-  //   reverse() {
-  //     //flip head/tail
-  //     let temp = this.head // current pointer
-  //     this.head = this.tail 
-  //     this.tail = temp
+  reverse() { // tail (t) => 1(n) => 2 => 3 => head => null
+    let temp = this.head // main pointer
 
-  //     //pointers 
-  //     let next = temp // lead pointer
-  //     let prev = null // prev pointer
+    //flip head/tail
+    this.head = this.tail
+    this.tail = temp
 
-  //     // reverse logic
-  //     for (let i = 0; i < this.length; i++) {
-  //         next = temp.next // lead pointer to next node
-  //         temp.next = prev // reverses node order
-  //         prev = temp // prev pointer to current node
-  //         temp = next // current pointer ++
-  //     }
-  // }
+    //pointers
+    let next = temp // lead pointer
+    let prev = null // prev pointer
+
+    // reverse logic
+    for (let i = 0; i < this.length; i++) {
+      next = temp.next // lead pointer to next node
+      temp.next = prev // reverses node order
+      prev = temp // prev pointer to current node
+      temp = next // current pointer ++
+    }
+  }
 
   clear() {
     this.head = null
