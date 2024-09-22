@@ -29,7 +29,7 @@ consecutive strings : follow one after another without an interruption
 function longestConsec(strarr, k) {
     let res = ''
     if (k < strarr.length) {
-        for (let i = 0; i < strarr.length; i++) {
+        for (let i = 0; i <= strarr.length; i++) {
             let current = []
             for (let j = i; j < i + k; j++) {
                 current.push(strarr[j])
