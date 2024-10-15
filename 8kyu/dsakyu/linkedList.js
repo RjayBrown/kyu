@@ -33,11 +33,11 @@ class LinkedList {
     }
 
     let prev = this.head
-    let temp = this.head
+    let current = this.head
 
-    while (temp.next !== null) {
-      prev = temp
-      temp = temp.next
+    while (current.next !== null) {
+      prev = current
+      current = current.next
     }
 
     if (this.length === 0) {
@@ -51,13 +51,14 @@ class LinkedList {
   }
 
   unshift(value) {
+    let newNode = new Node(value)
+
     if (!this.head.value) {
       this.head = newNode
       this.tail = newNode
       return this.length = 1
     }
 
-    let newNode = new Node(value)
     newNode.next = this.head
     this.head = newNode
     this.length++
@@ -102,15 +103,16 @@ class LinkedList {
     let node = this.getByIndex(index)
     let newNode = new Node(value)
 
-    if (node.next === null) {
+    if (node === this.head) {
+      this.head = newNode
+      newNode.next = node
+      this.length++
+      return this
+      // else if inserting at tail
+    } else if (node.next === null) {
       node.next = newNode
       newNode.next = null
       this.tail = newNode
-      this.length++
-      return this
-    } else if (node === this.head) {
-      this.head = newNode
-      newNode.next = node
       this.length++
       return this
     }
@@ -123,31 +125,31 @@ class LinkedList {
 
   size() {
     let count = 0
-    let temp = this.head
-    while (temp.next) {
-      temp = temp.next
+    let current = this.head
+    while (current.next) {
+      current = current.next
       count++
     }
     return count
   }
 
   reverse() { // tail (t) => 1(n) => 2 => 3 => head => null
-    let temp = this.head // main pointer
+    let current = this.head // main pointer
 
     //flip head/tail
     this.head = this.tail
-    this.tail = temp
+    this.tail = current
 
     //pointers
-    let next = temp // lead pointer
+    let next = current // lead pointer
     let prev = null // prev pointer
 
     // reverse logic
     for (let i = 0; i < this.length; i++) {
-      next = temp.next // lead pointer to next node
-      temp.next = prev // reverses node order
-      prev = temp // prev pointer to current node
-      temp = next // current pointer ++
+      next = current.next // lead pointer to next node
+      current.next = prev // reverses node order
+      prev = current // prev pointer to current node
+      current = next // current pointer ++
     }
   }
 
