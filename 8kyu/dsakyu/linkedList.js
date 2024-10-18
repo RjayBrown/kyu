@@ -8,6 +8,11 @@ class Node {
 
 class LinkedList {
   constructor(value) {
+    if (!value) {
+      this.head = null
+      this.tail = null
+      this.length = 0
+    }
     this.head = new Node(value)
     this.tail = this.head
     this.length = 1
@@ -123,6 +128,28 @@ class LinkedList {
     return this
   }
 
+  delete(index) {
+    if (!this.head || index > this.length - 1) {
+      return undefined
+    }
+
+    let node = this.getByIndex(index)
+
+    if (index === 0) {
+      this.head = node.next
+      node.next = null
+    } else {
+      let prev = this.getByIndex(index - 1)
+
+      prev.next = node.next
+      node.next = null
+    }
+
+    this.length--
+
+    return this
+  }
+
   size() {
     let count = 0
     let current = this.head
@@ -133,7 +160,7 @@ class LinkedList {
     return count
   }
 
-  reverse() { // tail (t) => 1(n) => 2 => 3 => head => null
+  reverse() {
     let current = this.head // main pointer
 
     //flip head/tail
