@@ -108,13 +108,12 @@ class LinkedList {
     let node = this.getByIndex(index)
     let newNode = new Node(value)
 
-    if (node === this.head) {
+    if (node === this.head) { // inserting at head
       this.head = newNode
       newNode.next = node
       this.length++
       return this
-      // else if inserting at tail
-    } else if (node.next === null) {
+    } else if (node.next === null) { // inserting at tail
       node.next = newNode
       newNode.next = null
       this.tail = newNode
@@ -129,14 +128,25 @@ class LinkedList {
   }
 
   delete(index) {
-    if (!this.head || index > this.length - 1) {
+    if (!this.head || index > this.length - 1) { // empty check / valid index check
       return undefined
     }
 
-    let node = this.getByIndex(index)
+    let node = this.getByIndex(index) // pointer
 
-    if (index === 0) {
+    if (index === 0) { // removing head - override shift method (list length)
+      this.shift()
+      this.length++
+    } else if (index === this.length - 1) { // removing tail - override pop method (list length)
+      this.pop()
+      this.length++
+    } else if (index === 0 && this.length === 1) { // removing last remaining node
       this.head = node.next
+      node.next = null
+      this.tail = null
+    } else if (this.length === 2) { // removing second to last remaining node
+      this.head = node.next
+      this.tail = node.next
       node.next = null
     } else {
       let prev = this.getByIndex(index - 1)
