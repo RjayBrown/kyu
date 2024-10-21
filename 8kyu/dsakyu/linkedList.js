@@ -8,39 +8,44 @@ class Node {
 
 class LinkedList {
   constructor(value) {
-    if (!value) {
+    if (value === undefined) {
       this.head = null
       this.tail = null
       this.length = 0
+    } else {
+      this.head = new Node(value)
+      this.tail = this.head
+      this.length = 1
     }
-    this.head = new Node(value)
-    this.tail = this.head
-    this.length = 1
+
+    return this
   }
 
   push(value) {
     let newNode = new Node(value)
 
-    if (!this.head.value) {
+    if (!this.head) {
       this.head = newNode
       this.tail = newNode
-      return this.length = 1
+      this.length++
+      return this
     }
 
     this.tail.next = newNode
     this.tail = newNode
     this.length++
+    return this
   }
 
   pop() {
-    if (!this.head.value) {
-      return undefined
+    if (!this.head) {
+      return false
     }
 
     let prev = this.head
     let current = this.head
 
-    while (current.next !== null) {
+    while (current.next !== null) { // loop to assign pointers to last two nodes
       prev = current
       current = current.next
     }
@@ -50,9 +55,12 @@ class LinkedList {
       this.tail = null
     }
 
+    const deleted = this.tail
     prev.next = null
     this.tail = prev
     this.length--
+
+    return deleted
   }
 
   unshift(value) {
@@ -61,20 +69,26 @@ class LinkedList {
     if (!this.head.value) {
       this.head = newNode
       this.tail = newNode
-      return this.length = 1
+      this.length++
+      return this
     }
 
     newNode.next = this.head
     this.head = newNode
     this.length++
+
+    return this
   }
 
   shift() {
-    if (!this.head.value) {
-      return undefined
+    if (!this.head) {
+      return false
     }
+    const deleted = this.head
     this.head = this.head.next
     this.length--
+
+    return deleted
   }
 
   getFirst() {
@@ -86,6 +100,13 @@ class LinkedList {
   }
 
   getByIndex(index) {
+    if (!this.head || index === undefined || index > this.length) { // empty check / valid index check
+      return null
+    }
+    if (index === 0) {
+      return this.head
+    }
+
     let i = 0
     let node = this.head
 
@@ -104,20 +125,24 @@ class LinkedList {
   }
 
   insert(index, value) {
+    if (index === undefined || value === undefined) { // valid params check
+      return false
+    }
+
     let i = 0
     let node = this.getByIndex(index)
     let newNode = new Node(value)
 
-    if (node === this.head) { // inserting at head
+    if (this.head === null) { // inserting into empty list
       this.head = newNode
-      newNode.next = node
-      this.length++
-      return this
-    } else if (node.next === null) { // inserting at tail
-      node.next = newNode
-      newNode.next = null
       this.tail = newNode
-      this.length++
+      this.length = 1
+      return this
+    } else if (node === this.head) { // inserting at head
+      this.unshift(value)
+      return this
+    } else if (node === this.tail) { // inserting at tail
+      this.push(value)
       return this
     }
 
@@ -128,40 +153,38 @@ class LinkedList {
   }
 
   delete(index) {
-    if (!this.head || index > this.length - 1) { // empty check / valid index check
-      return undefined
+    if (!this.head || index === undefined || index > this.length - 1) { // empty check / valid index check
+      return false
     }
 
     let node = this.getByIndex(index) // pointer
 
-    if (index === 0) { // removing head - override shift method (list length)
+    if (index === 0 && this.length > 1) { // removing head - override shift method (list length)
       this.shift()
       this.length++
-    } else if (index === this.length - 1) { // removing tail - override pop method (list length)
+    } else if (index !== 0 && index === this.length - 1) { // removing tail - override pop method (list length)
       this.pop()
       this.length++
-    } else if (index === 0 && this.length === 1) { // removing last remaining node
-      this.head = node.next
-      node.next = null
-      this.tail = null
+    } else if (index === 0 && this.length === 1) { // removing last remaining node - override clear method (list length)
+      this.clear()
+      this.length++
     } else if (this.length === 2) { // removing second to last remaining node
       this.head = node.next
       this.tail = node.next
       node.next = null
     } else {
-      let prev = this.getByIndex(index - 1)
+      let prev = this.getByIndex(index - 1) // pointer to prev node
 
       prev.next = node.next
-      node.next = null
     }
 
     this.length--
 
-    return this
+    return node
   }
 
   size() {
-    let count = 0
+    let count = 1
     let current = this.head
     while (current.next) {
       current = current.next
@@ -171,6 +194,10 @@ class LinkedList {
   }
 
   reverse() {
+    if (!this.head) { // empty check
+      return false
+    }
+
     let current = this.head // main pointer
 
     //flip head/tail
@@ -178,20 +205,24 @@ class LinkedList {
     this.tail = current
 
     //pointers
-    let next = current // lead pointer
+    let lead = current // lead pointer
     let prev = null // prev pointer
 
     // reverse logic
     for (let i = 0; i < this.length; i++) {
-      next = current.next // lead pointer to next node
+      lead = current.next // lead pointer to next node
       current.next = prev // reverses node order
       prev = current // prev pointer to current node
-      current = next // current pointer ++
+      current = lead // current pointer ++
     }
   }
 
   clear() {
     this.head = null
+    this.tail = null
+    this.length = 0
+
+    return true
   }
 }
 
