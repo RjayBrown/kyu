@@ -24,24 +24,24 @@ class Tree {
         } else {
             let current = this.root
 
-            while (true) {
+            while (current) {
                 if (newNode.value === current.value) { // Checks for duplicate value
                     return undefined
                 }
 
                 if (newNode.value < current.value) { // condition for left insert
-                    if (current.left === null) {
+                    if (current.left) {
+                        current = current.left // moving pointer to next node
+                    } else {
                         current.left = newNode
                         return this
-                    } else {
-                        current = current.left // moving pointer to next node
                     }
                 } else { // condition for right insert - newNode.value > current.value
-                    if (current.right === null) {
+                    if (current.right) {
+                        current = current.right // moving pointer to next node
+                    } else {
                         current.right = newNode
                         return this
-                    } else {
-                        current = current.right // moving pointer to next node
                     }
                 }
             }
